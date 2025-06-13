@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - {{ data.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="profile">
+            <img src="{{ url_for('static', filename='img/img.jpg') }}" alt="Фото">
+            <h1>{{ data.name }}</h1>
+            <p>{{ data.title }}</p>
+        </div>
+        <div class="contact">
+            <p><strong>Email:</strong> {{ data.email }}</p>
+            <p><strong>Телефон:</strong> {{ data.phone }}</p>
+            <p><strong>Местоположение:</strong> {{ data.location }}</p>
+        </div>
+    </header>
+
+    <section class="about">
+        <h2>Обо мне</h2>
+        <p>{{ data.about }}</p>
+    </section>
+
+    <section class="skills">
+        <h2>Навыки</h2>
+        <ul>
+            {% for skill in data.skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="experience">
+        <h2>Опыт работы</h2>
+        {% for job in data.experience %}
+            <div class="job">
+                <h3>{{ job.position }} в {{ job.company }}</h3>
+                <p><em>{{ job.duration }}</em></p>
+                <p>{{ job.description }}</p>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section class="education">
+        <h2>Образование</h2>
+        {% for edu in data.education %}
+            <div class="edu">
+                <h3>{{ edu.degree }}</h3>
+                <p><em>{{ edu.university }} ({{ edu.year }})</em></p>
+            </div>
+        {% endfor %}
+    </section>
+</body>
+</html>
